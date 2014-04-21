@@ -46,7 +46,7 @@ import org.rev317.api.wrappers.walking.TilePath;
 import org.rev317.api.methods.Interfaces;
 
 
-@ScriptManifest(author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 1.0)
+@ScriptManifest(author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 1.5)
 public class USThiever extends Script implements Paintable, MessageListener {
 
 	private final ArrayList<Strategy> strategies = new ArrayList<Strategy>();
