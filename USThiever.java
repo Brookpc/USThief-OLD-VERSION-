@@ -143,36 +143,35 @@ public class USThiever extends Script implements Paintable, MessageListener {
 
 		@Override
 		public boolean activate() {
-			final Npc Sells[] = Npcs.getNearest(2270);
-			final Npc Marty = Sells[0];
 			return Inventory.isFull()
-					&& TA.contains(Players.getLocal().getLocation())
-					&& Marty != null;
+					&& TA.contains(Players.getLocal().getLocation());
 		}
 
 		@Override
 		public void execute() {
-			final Npc Sells[] = Npcs.getNearest(2270);
-			final Npc Marty = Sells[0];
-
-			if(!Marty.isOnScreen()){
-				Tile NLoc = Marty.getLocation();
+			for (Npc m : Npcs.getNearest(2270)) {;
+			if(!m.isOnScreen() && m != null){
+				Tile NLoc = m.getLocation();
 				NLoc.clickMM();
 				Time.sleep(500);
 			}
-			if (Interfaces.getOpenInterfaceId() != 3824 && Marty != null) {
+			if (Interfaces.getOpenInterfaceId() != 3824 && m != null) {
 				Npcs.getNearest(2270)[0].interact("Trade");
 				Time.sleep(200);
 			} else if (Interfaces.getOpenInterfaceId() == 3824) {
 				for (Item i : Inventory.getItems(sellIDs)) {
+					if(sellIDs != null){
 					i.interact("Sell 50");
 				}
-				Time.sleep(1000);
-			} else if (Marty == null) {
+					}
+				Time.sleep(200);
+			} else if (m == null) {
 				Time.sleep(200);
 			}
 			Time.sleep(100);
+			}
 		}
+
 
 	}
 	@Override
