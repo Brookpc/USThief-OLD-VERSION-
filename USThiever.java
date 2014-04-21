@@ -54,7 +54,7 @@ public class USThiever extends Script implements Paintable, MessageListener {
 	public int npcID;
 	public int stallID;
 	public int startlvl;
-	public int[] sellIDs = {950, 1891, 1901,2309,958,4658}; //Silk, Cake, Chocolate Slice,Bread,Wolf Fur,Silver Pot
+	public int[] sellIDs = {950, 1891, 1901,2309,958,4658,2007}; //Silk, Cake, Chocolate Slice,Bread,Wolf Fur,Silver Pot,Spice
 	public int curlvl;
 	public int lvlcount;
 	public int cashMade;
@@ -100,61 +100,44 @@ public class USThiever extends Script implements Paintable, MessageListener {
 		lvlcount = (curlvl - startlvl);
 		return;
 	}
+	public void onFinish(){
+		
+	}
 	public class steal implements Strategy{
 
 
 		@Override
 		public boolean activate() {
+			return !Inventory.isFull()
+					&& TA.contains(Players.getLocal().getLocation());
+		}
+
+		@Override
+		public void execute() {
+			atlvlchange();
+			for (SceneObject i : SceneObjects.getNearest(stallID)) {;
+			if (i.isOnScreen()) {
+                i.interact("Steal-from");
+                Time.sleep(150);
+			}else {
+       		 i.getLocation().clickMM();
+       		 Time.sleep(100);
+			}
+			}
 			curlvl = Skill.THIEVING.getLevel();
 			if (curlvl < 20){
 				stallID = 1616;} //Bread
 			if (curlvl >= 20 && curlvl <35){
 				stallID = 1615;} //Silk
 			if (curlvl >= 35 && curlvl < 50){
-				stallID = 1615;} //Fur
+				stallID = 1619;} //Fur
 			if (curlvl >= 50 && curlvl < 65){
-				stallID = 1615;} //Silver
+				stallID = 1614;} //Silver
 			if (curlvl >= 65 && curlvl < 75){
-				stallID = 1615;} //Spice
+				stallID = 1618;} //Spice
 			if (curlvl >=75){
-				stallID = 1615;} //Gems
-
-			final SceneObject Stalls[] = SceneObjects.getNearest(stallID);
-			final SceneObject Steal = Stalls[0];
-			return !Inventory.isFull()
-					&& TA.contains(Players.getLocal().getLocation())
-					&& Steal != null;
-		}
-
-		@Override
-		public void execute() {
-			atlvlchange();
-			final SceneObject Stalls[] = SceneObjects.getNearest(stallID);
-			final SceneObject Steal = Stalls[0];
-			for (SceneObject i : SceneObjects.getNearest(stallID)) {;
-			if (Steal.isOnScreen() && Players.getLocal().getAnimation() == -1 && Steal != null && !Players.getLocal().isWalking()) {
-				try{
-					i.interact("");
-
-				} catch(Exception e) { 
-
-				}
-				Time.sleep(500);
-			} else if (!Steal.isOnScreen() && Players.getLocal().getAnimation() == -1 && Steal != null){
-				Tile Loc = Steal.getLocation();
-				Loc.clickMM();
-				Time.sleep(500);
-			}
-			else break;
-			}
-			while (Players.getLocal().getAnimation() != -1) {
-				Time.sleep(500);
-
-			}
-
-		}
-
-
+				stallID = 1617;} //Gems
+	}
 	}
 	public class trade implements Strategy{
 
