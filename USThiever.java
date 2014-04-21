@@ -192,7 +192,7 @@ public class USThiever extends Script implements Paintable, MessageListener {
 		g.drawString("Levels Gained: " + lvlcount, 6, 58);
 		g.drawString("Runtime: " + RUNTIME, 6, 71);
 		g.drawString("Cash Made: N/A", 6, 84);
-		g.drawString("Current Level: " + startlvl, 6, 97);
+		g.drawString("Current Level: " + curlvl, 6, 97);
 
 
 	}
