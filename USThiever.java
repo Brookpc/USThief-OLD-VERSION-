@@ -125,7 +125,7 @@ public class cleanup extends Script implements Paintable, MessageListener
 			atlvlchange();
 			for( SceneObject i: SceneObjects.getNearest( stallID ) ) {
 				;
-				if( i.isOnScreen() ) {
+				if(i != null &&  i.isOnScreen() ) {
 					i.interact( "Steal-from" );
 					Time.sleep( 150 );
 				} else {
@@ -166,12 +166,12 @@ public class cleanup extends Script implements Paintable, MessageListener
 		@Override
 		public void execute() {
 			for (Npc m : Npcs.getNearest(2270)) {;
-			if(!m.isOnScreen() && m != null){
+			if( m != null && !m.isOnScreen()){
 				Tile NLoc = m.getLocation();
 				NLoc.clickMM();
 				Time.sleep(500);
 			}
-			if (Interfaces.getOpenInterfaceId() != 3824 && m != null) {
+			if (m != null && Interfaces.getOpenInterfaceId() != 3824) {
 				Npcs.getNearest(2270)[0].interact("Trade");
 				Time.sleep(200);
 			} else if (Interfaces.getOpenInterfaceId() == 3824) {
