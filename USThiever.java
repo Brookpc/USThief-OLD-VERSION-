@@ -31,7 +31,7 @@ import org.rev317.api.wrappers.scene.Area;
 import org.rev317.api.wrappers.scene.SceneObject;
 import org.rev317.api.wrappers.scene.Tile;
 
-@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 1.5 )
+@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 2.0 )
 public class USThiever extends Script implements Paintable, MessageListener
 {
 
@@ -126,10 +126,10 @@ public class USThiever extends Script implements Paintable, MessageListener
 				;
 				if(i != null &&  i.isOnScreen() ) {
 					i.interact( "Steal-from" );
-					Time.sleep( 150 );
+					Time.sleep( 200 );
 				} else {
 					i.getLocation().clickMM();
-					Time.sleep( 100 );
+					Time.sleep( 200 );
 				}
 			}
 			curlvl = Skill.THIEVING.getLevel();
@@ -177,6 +177,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 				for (Item i : Inventory.getItems(sellIDs)) {
 					if(sellIDs != null){
 						i.interact("Sell 50");
+						Time.sleep(500);
 					}
 				}
 				Time.sleep(200);
