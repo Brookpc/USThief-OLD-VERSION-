@@ -31,7 +31,7 @@ import org.rev317.api.wrappers.scene.Area;
 import org.rev317.api.wrappers.scene.SceneObject;
 import org.rev317.api.wrappers.scene.Tile;
 
-@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 2.3 )
+@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 2.5 )
 public class USThiever extends Script implements Paintable, MessageListener
 {
 
@@ -54,7 +54,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 	@Override
 	public boolean onExecute()
 	{
-		img1 = getImage( "http://i.imgur.com/ORtvby8.png" );
+		img1 = getImage( "http://i.imgur.com/dQB0c5Y.png" );
 		startlvl = Skill.THIEVING.getLevel();
 		curlvl = Skill.THIEVING.getLevel();
 		if( curlvl < 20 ) {
@@ -248,9 +248,9 @@ public class USThiever extends Script implements Paintable, MessageListener
 		g.drawImage(img1, 4, 23, null);
 		g.setFont(font2);
 		g.setColor(color1);
-		g.drawString( "" + lvlcount, 115, 56 );
-		g.drawString( "" + RUNTIME, 78, 85 );
-		g.drawString( "" + cashMade, 101, 70 );
+		g.drawString( "" + lvlcount, 82, 57);
+		g.drawString( "" + RUNTIME, 82, 83);
+		g.drawString( "" + cashMade, 82, 70);
 
 	}
 
