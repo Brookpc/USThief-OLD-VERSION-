@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -18,6 +19,7 @@ import org.parabot.environment.scripts.ScriptManifest;
 import org.parabot.environment.scripts.framework.Strategy;
 import org.rev317.api.events.MessageEvent;
 import org.rev317.api.events.listeners.MessageListener;
+import org.rev317.api.methods.Camera;
 import org.rev317.api.methods.Interfaces;
 import org.rev317.api.methods.Inventory;
 import org.rev317.api.methods.Npcs;
@@ -75,6 +77,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 			stallID = 1617;
 		} // Gems
 
+		Camera.setRotation(45);
 		strategies.add( new steal() );
 		strategies.add( new trade() );
 		provide( strategies );
@@ -124,7 +127,10 @@ public class USThiever extends Script implements Paintable, MessageListener
 			for( SceneObject i: SceneObjects.getNearest( stallID ) ) {
 				;
 				if(i != null &&  i.isOnScreen() ) {
-					i.interact( "Steal-from" );
+					try {
+						i.interact( "Steal-from" );
+					} catch(Exception e) {
+					}
 					Time.sleep( 200 );
 				} else {
 					i.getLocation().clickMM();
@@ -167,6 +173,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 			if( m != null && !m.isOnScreen()){
 				Tile NLoc = m.getLocation();
 				NLoc.clickMM();
+				Time.sleep(500);
 			}
 			if (m != null && Interfaces.getOpenInterfaceId() != 3824) {
 				Npcs.getNearest(2270)[0].interact("Trade");
@@ -174,15 +181,16 @@ public class USThiever extends Script implements Paintable, MessageListener
 			} else if (Interfaces.getOpenInterfaceId() == 3824) {
 				for (Item i : Inventory.getItems(sellIDs)) {
 					if(sellIDs != null){
-						i.interact("Sell 50");
-						Time.sleep(500);
+						try {
+							i.interact("Sell 50");
+						} catch(Exception e) {
+						}
 					}
 				}
 				Time.sleep(200);
 			} else if (m == null) {
 				Time.sleep(200);
 			}
-			Time.sleep(100);
 			}
 		}
 
