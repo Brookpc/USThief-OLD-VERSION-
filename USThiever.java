@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -30,7 +31,7 @@ import org.rev317.api.wrappers.scene.Area;
 import org.rev317.api.wrappers.scene.SceneObject;
 import org.rev317.api.wrappers.scene.Tile;
 
-@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 2.0 )
+@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 1.5 )
 public class USThiever extends Script implements Paintable, MessageListener
 {
 
@@ -53,7 +54,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 	@Override
 	public boolean onExecute()
 	{
-		img1 = getImage( "http://i.imgur.com/5b9BJFi.png" );
+		img1 = getImage( "http://i.imgur.com/ORtvby8.png" );
 		startlvl = Skill.THIEVING.getLevel();
 		curlvl = Skill.THIEVING.getLevel();
 		if( curlvl < 20 ) {
@@ -233,17 +234,13 @@ public class USThiever extends Script implements Paintable, MessageListener
 	@Override
 	public void paint( Graphics arg0 )
 	{
-		Graphics2D g = ( Graphics2D )arg0;
-		g.setColor( new Color( 0f, 0f, 0f, .5f ) );
-		g.fillRect( 4, 23, 135, 95 );
-		g.drawImage( img1, 4, 23, null );
-		g.setFont( font2 );
-		g.setColor( color1 );
-		g.drawString( "Levels Gained: " + lvlcount, 6, 58 );
-		g.drawString( "Runtime: " + RUNTIME, 6, 71 );
-		g.drawString( "Cash Made: " + cashMade, 6, 84 );
-		g.drawString( "Items Stole: " + itemsStolen, 6, 97 );
-		g.drawString( "Current Level: " + curlvl, 6, 110 );
+		Graphics2D g = (Graphics2D) arg0;
+		g.drawImage(img1, 4, 23, null);
+		g.setFont(font2);
+		g.setColor(color1);
+		g.drawString( "" + lvlcount, 115, 56 );
+		g.drawString( "" + RUNTIME, 78, 85 );
+		g.drawString( "" + cashMade, 101, 70 );
 
 	}
 
