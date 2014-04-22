@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -168,7 +167,6 @@ public class USThiever extends Script implements Paintable, MessageListener
 			if( m != null && !m.isOnScreen()){
 				Tile NLoc = m.getLocation();
 				NLoc.clickMM();
-				Time.sleep(500);
 			}
 			if (m != null && Interfaces.getOpenInterfaceId() != 3824) {
 				Npcs.getNearest(2270)[0].interact("Trade");
