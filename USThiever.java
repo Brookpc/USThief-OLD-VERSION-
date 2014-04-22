@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -31,7 +32,7 @@ import org.rev317.api.wrappers.scene.SceneObject;
 import org.rev317.api.wrappers.scene.Tile;
 
 @ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Sd Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 1.5 )
-public class cleanup extends Script implements Paintable, MessageListener
+public class USThiever extends Script implements Paintable, MessageListener
 {
 
 	private final ArrayList<Strategy> strategies = new ArrayList<Strategy>();
@@ -39,7 +40,7 @@ public class cleanup extends Script implements Paintable, MessageListener
 	public int npcID;
 	public int stallID;
 	public int startlvl;
-	public int[] sellIDs = { 950, 1891, 1901, 2309, 958, 4658, 2007  1641, 1639, 1643 ,1637};
+	public int[] sellIDs = { 950, 1891, 1901, 2309, 958, 4658, 2007, 1641, 1639, 1643 ,1637};
 	public int curlvl;
 	public int lvlcount;
 	public int cashMade;
