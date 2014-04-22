@@ -31,7 +31,7 @@ import org.rev317.api.wrappers.scene.Area;
 import org.rev317.api.wrappers.scene.SceneObject;
 import org.rev317.api.wrappers.scene.Tile;
 
-@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Sd Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 1.5 )
+@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 1.5 )
 public class USThiever extends Script implements Paintable, MessageListener
 {
 
@@ -44,7 +44,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 	public int curlvl;
 	public int lvlcount;
 	public int cashMade;
-	public int infID;
+	public int itemsStolen;
 	private final Color color1 = new Color( 229, 255, 59 );
 	private final Font font2 = new Font( "Arial", 0, 14 );
 	private final Timer RUNTIME = new Timer();
@@ -192,9 +192,42 @@ public class USThiever extends Script implements Paintable, MessageListener
 
 
 	@Override
-	public void messageReceived( MessageEvent arg0 )
+	public void messageReceived( MessageEvent me )
 	{
-
+		if (me.getMessage().contains("You steal cake(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 7500;
+		} else if (me.getMessage().contains("You steal bread(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 3500;
+		} else if (me.getMessage().contains("You steal chocolate slice(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 1750;
+		} else if (me.getMessage().contains("You steal silk(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 729;
+		} else if (me.getMessage().contains("You steal grey wolf fur(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 13100;
+		} else if (me.getMessage().contains("You steal silver pot(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 16000;
+		} else if (me.getMessage().contains("You steal spice(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 22500;
+		} else if (me.getMessage().contains("You steal diamond ring(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 38000;
+		} else if (me.getMessage().contains("You steal ruby ring(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 31000;
+		} else if (me.getMessage().contains("You steal sappire ring(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 25000;
+		} else if (me.getMessage().contains("You steal emerald ring(s) from the stall.")) {
+			itemsStolen += 1;
+			cashMade += 27500;
+		}
 	}
 
 
@@ -203,14 +236,15 @@ public class USThiever extends Script implements Paintable, MessageListener
 	{
 		Graphics2D g = ( Graphics2D )arg0;
 		g.setColor( new Color( 0f, 0f, 0f, .5f ) );
-		g.fillRect( 4, 23, 130, 75 );
+		g.fillRect( 4, 23, 135, 95 );
 		g.drawImage( img1, 4, 23, null );
 		g.setFont( font2 );
 		g.setColor( color1 );
 		g.drawString( "Levels Gained: " + lvlcount, 6, 58 );
 		g.drawString( "Runtime: " + RUNTIME, 6, 71 );
-		g.drawString( "Cash Made: N/A", 6, 84 );
-		g.drawString( "Current Level: " + curlvl, 6, 97 );
+		g.drawString( "Cash Made: " + cashMade, 6, 84 );
+		g.drawString( "Items Stole: " + itemsStolen, 6, 97 );
+		g.drawString( "Current Level: " + curlvl, 6, 110 );
 
 	}
 
