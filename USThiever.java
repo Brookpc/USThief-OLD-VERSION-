@@ -39,9 +39,7 @@ public class cleanup extends Script implements Paintable, MessageListener
 	public int npcID;
 	public int stallID;
 	public int startlvl;
-	public int[] sellIDs = { 950, 1891, 1901, 2309, 958, 4658, 2007 }; // Silk, Cake, Chocolate
-	// Slice,Bread,Wolf
-	// Fur,Silver Pot,Spice
+	public int[] sellIDs = { 950, 1891, 1901, 2309, 958, 4658, 2007  1641, 1639, 1643 ,1637};
 	public int curlvl;
 	public int lvlcount;
 	public int cashMade;
