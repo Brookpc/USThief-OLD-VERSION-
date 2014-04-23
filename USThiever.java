@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -172,8 +173,11 @@ public class USThiever extends Script implements Paintable, MessageListener
 				Time.sleep(500);
 			}
 			if (m != null && Interfaces.getOpenInterfaceId() != 3824) {
-
+				try {
 				m.interact("Trade");
+				}catch (Exception e){
+					
+				}
 
 				Time.sleep(200);
 			} else if (Interfaces.getOpenInterfaceId() == 3824) {
