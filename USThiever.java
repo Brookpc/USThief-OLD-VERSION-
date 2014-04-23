@@ -31,7 +31,7 @@ import org.rev317.api.wrappers.scene.Area;
 import org.rev317.api.wrappers.scene.SceneObject;
 import org.rev317.api.wrappers.scene.Tile;
 
-@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 2.5 )
+@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 2.7 )
 public class USThiever extends Script implements Paintable, MessageListener
 {
 
@@ -126,10 +126,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 			for( SceneObject i: SceneObjects.getNearest( stallID ) ) {
 				;
 				if(i != null &&  i.isOnScreen() ) {
-					try {
 						i.interact( "Steal-from" );
-					} catch(Exception e) {
-					}
 					Time.sleep( 200 );
 				} else {
 					i.getLocation().clickMM();
@@ -175,11 +172,9 @@ public class USThiever extends Script implements Paintable, MessageListener
 				Time.sleep(500);
 			}
 			if (m != null && Interfaces.getOpenInterfaceId() != 3824) {
-				try {
-				Npcs.getNearest(2270)[0].interact("Trade");
-				} catch(Exception e) {
-					
-				}
+
+				m.interact("Trade");
+
 				Time.sleep(200);
 			} else if (Interfaces.getOpenInterfaceId() == 3824) {
 				for (Item i : Inventory.getItems(sellIDs)) {
@@ -204,37 +199,37 @@ public class USThiever extends Script implements Paintable, MessageListener
 	@Override
 	public void messageReceived( MessageEvent me )
 	{
-		if (me.getMessage().contains("You steal cake(s) from the stall.")) {
+		if (me.getMessage().contains("cake(s)")) {
 			itemsStolen += 1;
 			cashMade += 7500;
-		} else if (me.getMessage().contains("You steal bread(s) from the stall.")) {
+		} else if (me.getMessage().contains("bread(s)")) {
 			itemsStolen += 1;
 			cashMade += 3500;
-		} else if (me.getMessage().contains("You steal chocolate slice(s) from the stall.")) {
+		} else if (me.getMessage().contains("steal chocolate slice(s)")) {
 			itemsStolen += 1;
 			cashMade += 1750;
-		} else if (me.getMessage().contains("You steal silk(s) from the stall.")) {
+		} else if (me.getMessage().contains("steal silk(s)")) {
 			itemsStolen += 1;
 			cashMade += 729;
-		} else if (me.getMessage().contains("You steal grey wolf fur(s) from the stall.")) {
+		} else if (me.getMessage().contains("steal grey wolf fur(s)")) {
 			itemsStolen += 1;
 			cashMade += 13100;
-		} else if (me.getMessage().contains("You steal silver pot(s) from the stall.")) {
+		} else if (me.getMessage().contains("steal silver pot(s)")) {
 			itemsStolen += 1;
 			cashMade += 16000;
-		} else if (me.getMessage().contains("You steal spice(s) from the stall.")) {
+		} else if (me.getMessage().contains("steal spice(s)")) {
 			itemsStolen += 1;
 			cashMade += 22500;
-		} else if (me.getMessage().contains("You steal diamond ring(s) from the stall.")) {
+		} else if (me.getMessage().contains("steal diamond ring(s)")) {
 			itemsStolen += 1;
 			cashMade += 38000;
-		} else if (me.getMessage().contains("You steal ruby ring(s) from the stall.")) {
+		} else if (me.getMessage().contains("steal ruby ring(s) from the stall.")) {
 			itemsStolen += 1;
 			cashMade += 31000;
-		} else if (me.getMessage().contains("You steal sappire ring(s) from the stall.")) {
+		} else if (me.getMessage().contains("steal sappire ring(s)")) {
 			itemsStolen += 1;
 			cashMade += 25000;
-		} else if (me.getMessage().contains("You steal emerald ring(s) from the stall.")) {
+		} else if (me.getMessage().contains("steal emerald ring(s).")) {
 			itemsStolen += 1;
 			cashMade += 27500;
 		}
