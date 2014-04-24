@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,7 +19,9 @@ import org.parabot.environment.scripts.Script;
 import org.parabot.environment.scripts.ScriptManifest;
 import org.parabot.environment.scripts.framework.Strategy;
 import org.rev317.api.events.MessageEvent;
+import org.parabot.environment.input.Mouse;
 import org.rev317.api.events.listeners.MessageListener;
+import org.rev317.api.methods.Calculations;
 import org.rev317.api.methods.Camera;
 import org.rev317.api.methods.Interfaces;
 import org.rev317.api.methods.Inventory;
@@ -32,7 +35,7 @@ import org.rev317.api.wrappers.scene.Area;
 import org.rev317.api.wrappers.scene.SceneObject;
 import org.rev317.api.wrappers.scene.Tile;
 
-@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 2.7 )
+@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 3.0 )
 public class USThiever extends Script implements Paintable, MessageListener
 {
 
@@ -78,6 +81,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 		} // Gems
 
 		Camera.setRotation(45);
+		strategies.add( new tele() );
 		strategies.add( new steal() );
 		strategies.add( new trade() );
 		provide( strategies );
@@ -108,7 +112,39 @@ public class USThiever extends Script implements Paintable, MessageListener
 	{
 
 	}
+	public class tele implements Strategy 
+	{
 
+		@Override
+		public boolean activate() 
+		{
+			int DISTANCE = (int) Calculations.distanceBetween(Players.getLocal().getLocation(), new Tile(2665, 3311));
+			return DISTANCE > 50;
+		}
+
+		@Override
+		public void execute() 
+		{
+			Point SPELL_BOOK = new Point(743, 186);
+			Point SKILL_ZONE = new Point(641, 288);
+			Point THIEF = new Point(260, 400);
+			Point INV = new Point(659,187);
+			boolean NTF = true;
+			if (NTF == true){
+				Mouse.getInstance().click(SPELL_BOOK);
+				Time.sleep(300);
+				Mouse.getInstance().click(SKILL_ZONE);
+				Time.sleep(300);
+				Mouse.getInstance().click(THIEF);
+				Time.sleep(5000);
+				Mouse.getInstance().click(INV);
+				Time.sleep(300);
+				NTF = false;
+			}
+
+		}
+
+	}
 	public class steal implements Strategy
 	{
 
@@ -127,7 +163,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 			for( SceneObject i: SceneObjects.getNearest( stallID ) ) {
 				;
 				if(i != null &&  i.isOnScreen() ) {
-						i.interact( "Steal-from" );
+					i.interact( "Steal-from" );
 					Time.sleep( 200 );
 				} else {
 					i.getLocation().clickMM();
@@ -174,9 +210,9 @@ public class USThiever extends Script implements Paintable, MessageListener
 			}
 			if (m != null && Interfaces.getOpenInterfaceId() != 3824) {
 				try {
-				m.interact("Trade");
+					m.interact("Trade");
 				}catch (Exception e){
-					
+
 				}
 
 				Time.sleep(200);
@@ -227,7 +263,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 		} else if (me.getMessage().contains("steal diamond ring(s)")) {
 			itemsStolen += 1;
 			cashMade += 38000;
-		} else if (me.getMessage().contains("steal ruby ring(s) from the stall.")) {
+		} else if (me.getMessage().contains("steal ruby ring(s)")) {
 			itemsStolen += 1;
 			cashMade += 31000;
 		} else if (me.getMessage().contains("steal sappire ring(s)")) {
