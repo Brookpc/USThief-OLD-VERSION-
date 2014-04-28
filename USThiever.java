@@ -48,7 +48,7 @@ import org.rev317.api.methods.Skill;
 
 import parabotp.USThiever.Gui;
 
-@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 3.0 )
+@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 3.2 )
 public class USThiever extends Script implements Paintable, MessageListener
 {
 
