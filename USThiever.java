@@ -290,7 +290,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 		} else if (me.getMessage().contains("steal sapphire ring(s)")) {
 			itemsStolen += 1;
 			cashMade += 25000;
-		} else if (me.getMessage().contains("steal emerald ring(s).")) {
+		} else if (me.getMessage().contains("steal emerald ring(s)")) {
 			itemsStolen += 1;
 			cashMade += 27500;
 		}
