@@ -20,7 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.parabot.core.ui.components.LogArea;
 import org.parabot.environment.api.interfaces.Paintable;
 import org.parabot.environment.api.utils.Time;
 import org.parabot.environment.api.utils.Timer;
