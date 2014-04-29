@@ -48,36 +48,39 @@ import org.rev317.api.methods.Skill;
 
 import parabotp.USThiever.Gui;
 
-@ScriptManifest( author = "Brookpc", category = Category.THIEVING, description = "Steals and Sells items on UltimateScape 2", name = "USThiever", servers = { "UltimateScape" }, version = 3.0 )
+@ScriptManifest( author = "Brookpc", 
+category = Category.THIEVING, 
+description = "Steals and Sells items on UltimateScape 2", 
+name = "USThiever",
+servers = { "UltimateScape" }, version = 3.5 )
+
 public class USThiever extends Script implements Paintable, MessageListener
 {
 
 	private final ArrayList<Strategy> strategies = new ArrayList<Strategy>();
 	public static Area TA = new Area( new Tile( 2676, 3324, 0 ), new Tile( 2648, 3324, 0 ), new Tile( 2645, 3289, 0 ), new Tile( 2672, 3289, 0 ) );
-	public int npcID;
 	public int stallID;
 	public int startexp;
 	public int[] sellIDs = { 950, 1891, 1901, 2309, 958, 4658, 2007, 1641, 1639, 1643 ,1637};
-	public String[] items = {"cake(s)","bread(s)","steal chocolate slice(s)","steal silk(s)","steal grey wolf fur(s)","steal silver pot(s)","steal spice(s)", "steal diamond ring(s)" ,"steal ruby ring(s)" ,"steal diamond emerald(s)","steal diamond sapphire(s)"};
 	public int curlvl;
 	public int curexp;
 	public int expcount;
 	public int cashMade;
-	public int itemsStolen;
+	public String status = "Start the script...";
 	private final Color color1 = new Color( 229, 255, 59 );
 	private final Font font2 = new Font( "Arial", 0, 14 );
 	private final Timer RUNTIME = new Timer();
 	public static Image img1;
 	Gui g = new Gui();
 	public boolean guiWait = true;
-	public boolean paintWait = true;
 
 	@Override
 	public boolean onExecute()
 	{
-		img1 = getImage( "http://i.imgur.com/mdXG5j4.png" );
+		img1 = getImage( "http://i.imgur.com/aCQiD9M.png" );
 		g.setVisible(true);
 		while (guiWait) {
+			status = "Waiting...";
 			Time.sleep(200);
 		}
 		startexp = Skill.THIEVING.getExperience();
@@ -153,6 +156,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 			Point INV = new Point(659,187);
 			boolean NTF = true;
 			if (NTF == true){
+				status = "Teleporting to Skill Area...";
 				Mouse.getInstance().click(SPELL_BOOK);
 				Time.sleep(300);
 				Mouse.getInstance().click(SKILL_ZONE);
@@ -185,16 +189,18 @@ public class USThiever extends Script implements Paintable, MessageListener
 			for( SceneObject i: SceneObjects.getNearest( stallID ) ) {
 				;
 				if(i != null &&  i.isOnScreen() ) {
+					status = "Stealing...";
 					i.interact( "Steal-from" );
 					Time.sleep( 200 );
 				} else {
+					status = "Waiting";
 					i.getLocation().clickMM();
 					Time.sleep( 200 );
 				}
 			}
-			
+
 			curlvl = Skill.THIEVING.getLevel();
-			
+
 			if( curlvl < 20 ) {
 				stallID = 1616;
 			} // Bread
@@ -213,7 +219,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 			if( curlvl >= 75 ) {
 				stallID = 1617;
 			} // Gems
-			
+
 		}
 	}
 
@@ -228,13 +234,16 @@ public class USThiever extends Script implements Paintable, MessageListener
 		@Override
 		public void execute() {
 			for (Npc m : Npcs.getNearest(2270)) {;
+			status = "Looking for Trader...";
 			if( m != null && !m.isOnScreen()){
+				status = "Walking to Trader...";
 				Tile NLoc = m.getLocation();
 				NLoc.clickMM();
 				Time.sleep(500);
 			}
 			if (m != null && Interfaces.getOpenInterfaceId() != 3824) {
 				try {
+					status = "Trading...";
 					m.interact("Trade");
 				}catch (Exception e){
 
@@ -245,6 +254,7 @@ public class USThiever extends Script implements Paintable, MessageListener
 				for (Item i : Inventory.getItems(sellIDs)) {
 					if(sellIDs != null){
 						try {
+							status = "Trading...";
 							i.interact("Sell 50");
 						} catch(Exception e) {
 						}
@@ -307,9 +317,10 @@ public class USThiever extends Script implements Paintable, MessageListener
 		g.drawImage(img1, 4, 23, null);
 		g.setFont(font2);
 		g.setColor(color1);
-		g.drawString( "" + expcount, 82, 57);
-		g.drawString( "" + RUNTIME, 82, 83);
-		g.drawString( "" + cashMade, 82, 70);
+		g.drawString( "" + expcount, 91, 62);
+		g.drawString( "" + cashMade, 91, 75);
+		g.drawString( "" + RUNTIME, 91, 91);
+		g.drawString( "status: " + status, 4, 110);
 
 	}
 	public class Gui extends JFrame {
