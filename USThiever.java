@@ -45,8 +45,6 @@ import org.rev317.api.methods.Players;
 import org.rev317.api.methods.SceneObjects;
 import org.rev317.api.methods.Skill;
 
-import parabotp.USThiever.Gui;
-
 @ScriptManifest( author = "Brookpc", 
 category = Category.THIEVING, 
 description = "Steals and Sells items on UltimateScape 2", 
